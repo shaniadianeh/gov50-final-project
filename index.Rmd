@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to housing policy and residential segregation. 
+I am interested in exploring data related to housing policy and residential segregation. I hope to find data specifically on the housing voucher program. 
