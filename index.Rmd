@@ -11,7 +11,7 @@ output:
 
 ## Part 1: Project thoughts
 
-I am interested in exploring data related to the relationship between food stamp recipients and total families in each household. 
+I am interested in exploring data related to the relationship between food stamp recipients and total families in each household from the American Community Survey. 
 
 ## Part 2: Proposal for Project
 
