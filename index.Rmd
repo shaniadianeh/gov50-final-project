@@ -11,8 +11,30 @@ output:
 
 ## Part 1: Project thoughts
 
-I am interested in exploring data related to the relationship between food stamp recipients and total families in each household from the American Community Survey. 
+I am interested in exploring data related to the relationship between the US exports of crude oil to China and China's military spending from 2000-2010. 
 
 ## Part 2: Proposal for Project
 
-My research question is: Are multi-family households more likely to be food stamp recipients? I hypothesize that multi-family households are more likely to be recipients of food stamps because they experience greater financial strain due to caring for many individuals. Furthermore, multi-family households are common in immigrant families that may in some cases experience greater obstacles in earning income. I will use data from the American Community Survey for the year 2021. The explanatory variable of interest is the "Number of families in household" that is measured from 0-20 in 2021. The outcome variable of interest is "Food stamp recipiency" that is measured with values of N/A, No, and Yes. The observed pattern that would provide support for my hypothesis is observing a correlation between a greater number of families and a "Yes" for food stamp recipiency. Additionally, an increasing pattern of more families correlated with a greater proportion of food stamp recipients would affirm my hypothesis. The observed pattern that would disprove my hypothesis is that the greater number of families per household experiences a relatively low number of food stamp recipients. 
+My research question is: To what extent are China's foreign oil trade policies motivated by increasing military capabilities?
+
+I hypothesize that China's foreign oil trade policy, particularly ith the United States both drives and is driven by strengthening military capabilities. I hypothesize that this could be explained by historical memory and China's past with the century of humiliation. I will use data from the U.S. Energy Information Administration from 2000-2010 and from the World Bank. The explanatory variable of interest is the U.S. exports of crude oil to China in thousands of barrels, and the outcome variable of interest is military expenditures (% GDP) in China. 
+
+The observed pattern would provide support for my hypothesis in observing a correlation between a greater dependency on US oil exports and an increase in military expenditures. An increasing pattern would suggest that as China's reliance on US crude oil increases, military spending in China also increases. This result would accept my hypothesis. The observed pattern that would disprove my hypothesis is that a decreasing pattern would suggest a negative relationship such that as dependence on US oil increase, military spending decreases. 
+
+
+```{r}
+library(tidyverse)
+# Data from https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=MTTEXCH1&f=M
+data <- data.frame(Year = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010),
+                   Oil_Exports = c(10, 6, 628, 25, 322, 21, 219, 37, 118, 1111, 1652))
+plot <- 
+  ggplot(data = data,
+                    mapping = aes(x = Year,
+                                  y = Oil_Exports)) +
+  geom_point() + labs(x = "Year",
+                        y = "U.S. Crude Oil Exports to China (in thousands of barrels)",
+                      title = "U.S. Crude Oil Exports to China (in thousands of barrels), 2000-2010", caption = "Source: U.S. Energy Information Administration") +
+  scale_x_continuous(breaks = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010))
+plot
+
+```
