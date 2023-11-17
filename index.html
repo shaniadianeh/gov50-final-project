@@ -1576,7 +1576,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2000</span>, <span class='fl'>2001</span>, <span class='fl'>2002</span>, <span class='fl'>2003</span>, <span class='fl'>2004</span>, <span class='fl'>2005</span>, <span class='fl'>2006</span>, <span class='fl'>2007</span>, <span class='fl'>2008</span>, <span class='fl'>2009</span>, <span class='fl'>2010</span><span class='op'>)</span><span class='op'>)</span></span>
 <span><span class='va'>plot_2</span></span></code></pre>
 </div>
-<img src="index_files/figure-html5/unnamed-chunk-1-2.png" width="624" />
+<p><img src="index_files/figure-html5/unnamed-chunk-1-2.png" width="624" /></p>
+</div>
+<p>The coefficient of 0.0041704 for the explanatory variable, oil imports from the United States into China, is extremely small, signifying that there is an insignificant correlation between US imports of oil into China and military expenditures. This does not support my hypothesis and shows that oil imports from the United States do not have a significant relationship with military expenditures.</p>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
 <span><span class='va'>fit_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>new_value</span> <span class='op'>~</span> <span class='va'>oil_import</span>, data <span class='op'>=</span> <span class='va'>data_military</span><span class='op'>)</span></span>
