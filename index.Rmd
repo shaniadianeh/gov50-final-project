@@ -80,4 +80,5 @@ fit_1 |>
   knitr::kable()
 
 ```
+
 The coefficient of 0.0041704 for the explanatory variable, oil imports from the United States into China, is extremely small, signifying that there is an insignificant correlation between US imports of oil into China and military expenditures. This does not support my hypothesis and shows that oil imports from the United States do not have a significant relationship with military expenditures. 
