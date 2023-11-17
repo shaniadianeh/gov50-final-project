@@ -24,17 +24,81 @@ The observed pattern would provide support for my hypothesis in observing a corr
 
 ```{r}
 library(tidyverse)
+library(readxl)
+library(dplyr)
+ 
 # Data from  U.S. Energy Information Administration: https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=MTTEXCH1&f=M
-data <- data.frame(Year = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010),
-                   Oil_Exports = c(10, 6, 628, 25, 322, 21, 219, 37, 118, 1111, 1652))
+data_oil <- data.frame(Year = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010),
+                   oil_import = c(1105, 2044, 5280, 8915, 4917, 4407 , 3986 , 4970 , 4875, 15954, 18894))
 plot <- 
-  ggplot(data = data,
+  ggplot(data = data_oil,
                     mapping = aes(x = Year,
-                                  y = Oil_Exports)) +
+                                  y = oil_import)) +
   geom_point() + labs(x = "Year",
-                        y = "U.S. Crude Oil Exports to China (in thousands of barrels)",
-                      title = "U.S. Crude Oil Exports to China (in thousands of barrels), 2000-2010", caption = "Source: U.S. Energy Information Administration") +
+                        y = "Oil Imports from United States (in thousand barrels)",
+                      title = "Oil Imports in China from United States (in thousand barrels), 2000-2010", caption = "Source: U.S. Energy Information Administration") +
   scale_x_continuous(breaks = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010))
 plot
+
+data_military <- read_excel("militarydata.xls", sheet = "Data")
+data_military <- data_military |>
+  filter(`Country Name` == "China") |>
+  subset(select = -c(`Country Name`, `Country Code`, `Indicator Name`, `Indicator Code`))
+
+data_military <- data_military |>
+  pivot_longer(cols= everything()) 
+  
+data_military <- data_military |>
+  filter(name >= 2000 & name <= 2010) |>
+  mutate(new_value = value / 1000000000)
+
+data_military <- data_military |>
+  rename("Year" = "name")
+             
+data_military <- transform(data_military, Year = as.numeric(Year))
+
+data_military <- data_military |>
+  left_join(data_oil, by = "Year") |>
+    subset(select = -c(`value`))
+
+
+plot_2 <- 
+  ggplot(data = data_military,
+                    mapping = aes(x = Year,
+                                  y = new_value)) +
+  geom_point() + labs(x = "Year",
+                        y = "China Military Expenditures (USD billions)",
+                      title = "China Military Expenditures (USD billions), 2000-2010",
+                      caption = "Source: The World Bank")
+plot_2
+
+library(broom)
+fit_1 <- lm(new_value ~ oil_import, data = data_military)
+fit_1 |>
+  broom::tidy() |>
+  select(term, estimate) |>  
+  knitr::kable(digits = 2)
+fit_1
+
+```
+
+```{r}
+data_emissions <- read_csv("fossil-fuel-co2-emissions-by-nation_csv.csv")
+
+data_emissions <- data_emissions |>
+  filter(Country == "CHINA (MAINLAND)",
+         Year >= 2000 & Year <= 2010)
+
+merged <- full_join(data_emissions, data,
+          by = "Year")
+
+library(broom)
+fit_1 <- lm(coal_production ~ `Gas Fuel`, data = merged)
+fit_1 |>
+  broom::tidy() |>
+  select(term, estimate) |>  
+  knitr::kable(digits = 2)
+fit_1
+
 
 ```
