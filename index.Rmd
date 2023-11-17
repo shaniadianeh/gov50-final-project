@@ -72,6 +72,11 @@ plot_2 <-
     scale_x_continuous(breaks = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010))
 plot_2
 
+```
+
+The coefficient of 0.0041704 for the explanatory variable, oil imports from the United States into China, is extremely small, signifying that there is an insignificant correlation between US imports of oil into China and military expenditures. This does not support my hypothesis and shows that oil imports from the United States do not have a significant relationship with military expenditures. 
+
+```{r}
 library(broom)
 fit_1 <- lm(new_value ~ oil_import, data = data_military)
 fit_1 |>
@@ -80,5 +85,3 @@ fit_1 |>
   knitr::kable()
 
 ```
-
-The coefficient of 0.0041704 for the explanatory variable, oil imports from the United States into China, is extremely small, signifying that there is an insignificant correlation between US imports of oil into China and military expenditures. This does not support my hypothesis and shows that oil imports from the United States do not have a significant relationship with military expenditures. 
