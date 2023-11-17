@@ -61,7 +61,6 @@ data_military <- data_military |>
   left_join(data_oil, by = "Year") |>
     subset(select = -c(`value`))
 
-
 plot_2 <- 
   ggplot(data = data_military,
                     mapping = aes(x = Year,
@@ -69,7 +68,8 @@ plot_2 <-
   geom_point() + labs(x = "Year",
                         y = "China Military Expenditures (USD billions)",
                       title = "China Military Expenditures (USD billions), 2000-2010",
-                      caption = "Source: The World Bank")
+                      caption = "Source: The World Bank") +
+    scale_x_continuous(breaks = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010))
 plot_2
 
 library(broom)
@@ -77,28 +77,6 @@ fit_1 <- lm(new_value ~ oil_import, data = data_military)
 fit_1 |>
   broom::tidy() |>
   select(term, estimate) |>  
-  knitr::kable(digits = 2)
-fit_1
-
-```
-
-```{r}
-data_emissions <- read_csv("fossil-fuel-co2-emissions-by-nation_csv.csv")
-
-data_emissions <- data_emissions |>
-  filter(Country == "CHINA (MAINLAND)",
-         Year >= 2000 & Year <= 2010)
-
-merged <- full_join(data_emissions, data,
-          by = "Year")
-
-library(broom)
-fit_1 <- lm(coal_production ~ `Gas Fuel`, data = merged)
-fit_1 |>
-  broom::tidy() |>
-  select(term, estimate) |>  
-  knitr::kable(digits = 2)
-fit_1
-
+  knitr::kable()
 
 ```
