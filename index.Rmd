@@ -7,7 +7,129 @@ output:
     self_contained: false
 ---
 
+## Final Report:
+## Introduction:
+I am interested in exploring data related to the relationship between the China's imports of oil from the United States and China's military spending from 2000-2010. My research question is: To what extent are China's foreign oil trade policies motivated by increasing military capabilities? I hypothesize that as China's strengthens military capabilities, measured by military expenditures, China also increases oil imports from the United States. I hypothesize that this could be explained by historical memory and China's past with the century of humiliation. 
 
+Understanding this relationship is important because as the United States and China compete for dominance in the international order, energy security becomes increasingly relevant to the power dynamics at play. China's increasing dependency on foreign oil represents a vulnerability in the country's economic and political stability. Furthermore, the United States also largely controls the Persian Gulf's supply of oil, another major source of oil for China. Evaluating the relationship between China's military expenditures and oil imports from the United States could provide insight into the key drivers of China's need for oil and highlight important considerations in international relations and foreign policy. 
+ 
+## Data Section:
+I will use oil import data from the U.S. Energy Information Administration from 2000-2010 and data on China's military expenditures from The World Bank from the same period. Both measures are time-series data. The outcome variable of interest is the U.S. exports of crude oil to China in thousands of barrels, and the explanatory variable of interest is military expenditures (% GDP) in China. The observed pattern that would provide support for my hypothesis in observing a correlation between an increase in military expenditures with an associated increase in China's imports of oil from the United States. A positive coefficient or increasing trend would suggest that as China's military spending increases, the United States' import of oil also increases. This result would accept my hypothesis. The observed pattern that would disprove my hypothesis is an inverse relationship such that as military spending decreases, the import of United States oil to China increases, or vice versa.
+ 
+This research design is not cross-sectional, randomized, before-and-after, or differences-in-differences. Rather, my design study is a time-series design that includes data collected over time for both the independent and dependent variables. Analyzing the same time period for both variables and running a regression could illuminate a possible relationship between the two variables measured over time.  
+ 
+The following plot depicts the dependent variable, oil imports from the United States to China. 
+
+```{r}
+# Loading libraries
+library(tidyverse)
+library(readxl)
+library(dplyr)
+ 
+# Load data from  U.S. Energy Information Administration
+data_oil <- read_excel("MTTEXCH1m.xls", sheet = "Data 1")
+data_oil <- transform(data_oil, Year = as.numeric(Year))
+data_oil <- transform(data_oil, U.S..Exports.to.China.of.Crude.Oil.and.Petroleum.Products..Thousand.Barrels. = 
+                        as.numeric(U.S..Exports.to.China.of.Crude.Oil.and.Petroleum.Products..Thousand.Barrels.))
+
+# Clean data by year and sum the total oil imports for each year
+data_oil <- data_oil |>
+  filter(Year >= 2000 & Year <= 2010) |>
+  group_by(Year) |>
+  mutate(oil_import = sum(U.S..Exports.to.China.of.Crude.Oil.and.Petroleum.Products..Thousand.Barrels.)) |>
+  distinct(Year, oil_import)
+
+# Plotting dependent variable: year on x-axis, oil imports on y-axis
+plot <- 
+  ggplot(data = data_oil,
+                    mapping = aes(x = Year,
+                                  y = oil_import)) +
+  geom_point() + labs(x = "Year",
+                        y = "Oil Imports to China from United States (in thousand barrels)",
+                      title = "Oil Imports in China from United States (in thousand barrels), 2000-2010", caption = "Source: U.S. Energy Information Administration") +
+  scale_x_continuous(breaks = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010))
+plot
+
+```
+
+The following plot depicts the independent variable, China's military expenditures.
+
+```{r}
+# Load data from The World Bank & subset data to clean
+data_military <- read_excel("militarydata.xls", sheet = "Data")
+data_military <- data_military |>
+  filter(`Country Name` == "China") |>
+  subset(select = -c(`Country Name`, `Country Code`, `Indicator Name`, `Indicator Code`))
+
+data_military <- data_military |>
+  pivot_longer(cols= everything()) 
+
+# Filtering data by year and making numbers more manageable
+data_military <- data_military |>
+  filter(name >= 2000 & name <= 2010) |>
+  mutate(military_expenditures = value / 1000000000)
+
+data_military <- data_military |>
+  rename("Year" = "name")
+             
+data_military <- transform(data_military, Year = as.numeric(Year))
+
+# Merging data on military expenditures and data on oil production
+data_merged <- data_military |>
+  left_join(data_oil, by = "Year") |>
+    subset(select = -c(`value`))
+
+# Plotting independent variable: year on x-axis and military expenditures on y-axis
+plot_2 <- 
+  ggplot(data = data_merged,
+                    mapping = aes(x = Year,
+                                  y = military_expenditures)) +
+  geom_point() + labs(x = "Year",
+                        y = "China Military Expenditures (USD billions)",
+                      title = "China Military Expenditures (USD billions), 2000-2010",
+                      caption = "Source: The World Bank") +
+    scale_x_continuous(breaks = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010))
+plot_2
+
+```
+
+## Results:
+
+```{r}
+# Plotting the analysis; both the independent and dependent variables
+plot_results <- 
+  ggplot(data = data_merged,
+                    mapping = aes(x = military_expenditures,
+                                  y = oil_import)) +
+  geom_point() + labs(x = "China Military Expenditures (USD billions), 2000-2010",
+                        y = "Oil Imports from United States (in thousand barrels)",
+                      title = "China's Military Expenditures and Oil Imports from the U.S., 2000-2010",
+                      caption = "Source: The World Bank, U.S. Energy Information Administration") +
+  geom_smooth(method = lm, se=FALSE)
+plot_results
+
+```
+
+The scatterplot depicting the independent variable, China's military expenditures, and the dependent variable, oil imports from the United States to China, depict an increasing, positive trend. The line of best fit is an increasing, positive line which may indicate a positive relationship between military expenditures and oil imports. This means that as China's military expenditures increase, oil imports from the United States to China also increases. 
+
+```{r}
+# Run a regression analysis: oil imports as the explanatory variable, military expenditures as outcome variable
+library(broom)
+fit_1 <- lm(oil_import ~ military_expenditures, data = data_merged)
+fit_1 |>
+  broom::tidy() |>
+  select(term, estimate) |>
+  knitr::kable(digits = 3)
+
+```
+The coefficient of 158.8 for the explanatory variable, China's military expenditures, is large and positive, signifying that there is a statistically significant coefficient. This may indicate a positive correlation between military expenditures and China's import of US oil such that as military expenditures increase, oil imports from the United States also increase. This supports my original hypothesis that military expenditures in China may have a positive relationship with China's import of oil from the United States. However, given the many possible confounders or alternative explanations, we cannot interpret this relationship causally. However, we can suggest that there does exist a positive, statistically significant relationship between China's military expenditures and China's import of oil from the United States. 
+
+## Conclusion
+
+The scatterplot and regression analysis both indicated a positive, increasing relationship between military expenditures and oil exports, suggesting that as military expenditures increase, oil imports also increase. This supports my hypothesis that as China's military expenditures increase, oil imports from the United States also increase. However, there are limitations. There are possible vulnerabilities in this data analysis such as possible confounders that could undermine the relationship. A possible confounder could be the increase in China's population from 2000-2010, which may result in both an increase in oil imports broadly and an increase in China's military funding to support the security of a growing population. Additionally, while the United States plays a key role in Chinese foreign policy, comparing the oil imports from other countries to China in relation to the United States could provide a more substantive finding. With more time and money, I would expand this research design to consider possible control variables, such as the growing population in China, compare the oil imports from the United States in relation to other countries, and zoom in on the top countries that China imports oil from. I would also explore data analysis for alternative explanations. Additionally, military expenditures as a variable is very broad, so perhaps focusing on military funding that is allocated specifically for international security issues could be more illuminating.
+
+
+From previous milestones:
 
 ## Part 1: Project thoughts
 
@@ -20,68 +142,3 @@ My research question is: To what extent are China's foreign oil trade policies m
 I hypothesize that China's foreign oil trade policy, particularly ith the United States both drives and is driven by strengthening military capabilities. I hypothesize that this could be explained by historical memory and China's past with the century of humiliation. I will use data from the U.S. Energy Information Administration from 2000-2010 and from the World Bank. The explanatory variable of interest is the U.S. exports of crude oil to China in thousands of barrels, and the outcome variable of interest is military expenditures (% GDP) in China. 
 
 The observed pattern would provide support for my hypothesis in observing a correlation between a greater dependency on US oil exports and an increase in military expenditures. An increasing pattern would suggest that as China's reliance on US crude oil increases, military spending in China also increases. This result would accept my hypothesis. The observed pattern that would disprove my hypothesis is that a decreasing pattern would suggest a negative relationship such that as dependence on US oil increase, military spending decreases. 
-
-
-```{r}
-library(tidyverse)
-library(readxl)
-library(dplyr)
- 
-# Data from  U.S. Energy Information Administration: https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=MTTEXCH1&f=M
-data_oil <- data.frame(Year = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010),
-                   oil_import = c(1105, 2044, 5280, 8915, 4917, 4407 , 3986 , 4970 , 4875, 15954, 18894))
-plot <- 
-  ggplot(data = data_oil,
-                    mapping = aes(x = Year,
-                                  y = oil_import)) +
-  geom_point() + labs(x = "Year",
-                        y = "Oil Imports from United States (in thousand barrels)",
-                      title = "Oil Imports in China from United States (in thousand barrels), 2000-2010", caption = "Source: U.S. Energy Information Administration") +
-  scale_x_continuous(breaks = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010))
-plot
-
-data_military <- read_excel("militarydata.xls", sheet = "Data")
-data_military <- data_military |>
-  filter(`Country Name` == "China") |>
-  subset(select = -c(`Country Name`, `Country Code`, `Indicator Name`, `Indicator Code`))
-
-data_military <- data_military |>
-  pivot_longer(cols= everything()) 
-  
-data_military <- data_military |>
-  filter(name >= 2000 & name <= 2010) |>
-  mutate(new_value = value / 1000000000)
-
-data_military <- data_military |>
-  rename("Year" = "name")
-             
-data_military <- transform(data_military, Year = as.numeric(Year))
-
-data_military <- data_military |>
-  left_join(data_oil, by = "Year") |>
-    subset(select = -c(`value`))
-
-plot_2 <- 
-  ggplot(data = data_military,
-                    mapping = aes(x = Year,
-                                  y = new_value)) +
-  geom_point() + labs(x = "Year",
-                        y = "China Military Expenditures (USD billions)",
-                      title = "China Military Expenditures (USD billions), 2000-2010",
-                      caption = "Source: The World Bank") +
-    scale_x_continuous(breaks = c(2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010))
-plot_2
-
-```
-
-The coefficient of 0.0041704 for the explanatory variable, oil imports from the United States into China, is extremely small, signifying that there is an insignificant correlation between US imports of oil into China and military expenditures. This does not support my hypothesis and shows that oil imports from the United States do not have a significant relationship with military expenditures. 
-
-```{r}
-library(broom)
-fit_1 <- lm(new_value ~ oil_import, data = data_military)
-fit_1 |>
-  broom::tidy() |>
-  select(term, estimate) |>  
-  knitr::kable()
-
-```

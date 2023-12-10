@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","militarydata.xls"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","militarydata.xls","MTTEXCH1m.xls"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1517,58 +1517,79 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="part-1-project-thoughts">Part 1: Project thoughts</h2>
-<p>I am interested in exploring data related to the relationship between the US exports of crude oil to China and China’s military spending from 2000-2010.</p>
-<h2 id="part-2-proposal-for-project">Part 2: Proposal for Project</h2>
-<p>My research question is: To what extent are China’s foreign oil trade policies motivated by increasing military capabilities?</p>
-<p>I hypothesize that China’s foreign oil trade policy, particularly ith the United States both drives and is driven by strengthening military capabilities. I hypothesize that this could be explained by historical memory and China’s past with the century of humiliation. I will use data from the U.S. Energy Information Administration from 2000-2010 and from the World Bank. The explanatory variable of interest is the U.S. exports of crude oil to China in thousands of barrels, and the outcome variable of interest is military expenditures (% GDP) in China.</p>
-<p>The observed pattern would provide support for my hypothesis in observing a correlation between a greater dependency on US oil exports and an increase in military expenditures. An increasing pattern would suggest that as China’s reliance on US crude oil increases, military spending in China also increases. This result would accept my hypothesis. The observed pattern that would disprove my hypothesis is that a decreasing pattern would suggest a negative relationship such that as dependence on US oil increase, military spending decreases.</p>
+<h2 id="final-report">Final Report:</h2>
+<h2 id="introduction">Introduction:</h2>
+<p>I am interested in exploring data related to the relationship between the China’s imports of oil from the United States and China’s military spending from 2000-2010. My research question is: To what extent are China’s foreign oil trade policies motivated by increasing military capabilities? I hypothesize that as China’s strengthens military capabilities, measured by military expenditures, China also increases oil imports from the United States. I hypothesize that this could be explained by historical memory and China’s past with the century of humiliation.</p>
+<p>Understanding this relationship is important because as the United States and China compete for dominance in the international order, energy security becomes increasingly relevant to the power dynamics at play. China’s increasing dependency on foreign oil represents a vulnerability in the country’s economic and political stability. Furthermore, the United States also largely controls the Persian Gulf’s supply of oil, another major source of oil for China. Evaluating the relationship between China’s military expenditures and oil imports from the United States could provide insight into the key drivers of China’s need for oil and highlight important considerations in international relations and foreign policy.</p>
+<h2 id="data-section">Data Section:</h2>
+<p>I will use oil import data from the U.S. Energy Information Administration from 2000-2010 and data on China’s military expenditures from The World Bank from the same period. Both measures are time-series data. The outcome variable of interest is the U.S. exports of crude oil to China in thousands of barrels, and the explanatory variable of interest is military expenditures (% GDP) in China. The observed pattern that would provide support for my hypothesis in observing a correlation between an increase in military expenditures with an associated increase in China’s imports of oil from the United States. A positive coefficient or increasing trend would suggest that as China’s military spending increases, the United States’ import of oil also increases. This result would accept my hypothesis. The observed pattern that would disprove my hypothesis is an inverse relationship such that as military spending decreases, the import of United States oil to China increases, or vice versa.</p>
+<p>This research design is not cross-sectional, randomized, before-and-after, or differences-in-differences. Rather, my design study is a time-series design that includes data collected over time for both the independent and dependent variables. Analyzing the same time period for both variables and running a regression could illuminate a possible relationship between the two variables measured over time.</p>
+<p>The following plot depicts the dependent variable, oil imports from the United States to China.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Loading libraries</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readxl.tidyverse.org'>readxl</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
 <span> </span>
-<span><span class='co'># Data from  U.S. Energy Information Administration: https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&amp;s=MTTEXCH1&amp;f=M</span></span>
-<span><span class='va'>data_oil</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>Year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2000</span>, <span class='fl'>2001</span>, <span class='fl'>2002</span>, <span class='fl'>2003</span>, <span class='fl'>2004</span>, <span class='fl'>2005</span>, <span class='fl'>2006</span>, <span class='fl'>2007</span>, <span class='fl'>2008</span>, <span class='fl'>2009</span>, <span class='fl'>2010</span><span class='op'>)</span>,</span>
-<span>                   oil_import <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1105</span>, <span class='fl'>2044</span>, <span class='fl'>5280</span>, <span class='fl'>8915</span>, <span class='fl'>4917</span>, <span class='fl'>4407</span> , <span class='fl'>3986</span> , <span class='fl'>4970</span> , <span class='fl'>4875</span>, <span class='fl'>15954</span>, <span class='fl'>18894</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='co'># Load data from  U.S. Energy Information Administration</span></span>
+<span><span class='va'>data_oil</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='st'>"MTTEXCH1m.xls"</span>, sheet <span class='op'>=</span> <span class='st'>"Data 1"</span><span class='op'>)</span></span>
+<span><span class='va'>data_oil</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span><span class='op'>(</span><span class='va'>data_oil</span>, Year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>Year</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>data_oil</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span><span class='op'>(</span><span class='va'>data_oil</span>, U.S..Exports.to.China.of.Crude.Oil.and.Petroleum.Products..Thousand.Barrels. <span class='op'>=</span> </span>
+<span>                        <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>U.S..Exports.to.China.of.Crude.Oil.and.Petroleum.Products..Thousand.Barrels.</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Clean data by year and sum the total oil imports for each year</span></span>
+<span><span class='va'>data_oil</span> <span class='op'>&lt;-</span> <span class='va'>data_oil</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Year</span> <span class='op'>&gt;=</span> <span class='fl'>2000</span> <span class='op'>&amp;</span> <span class='va'>Year</span> <span class='op'>&lt;=</span> <span class='fl'>2010</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Year</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>oil_import <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>U.S..Exports.to.China.of.Crude.Oil.and.Petroleum.Products..Thousand.Barrels.</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/distinct.html'>distinct</a></span><span class='op'>(</span><span class='va'>Year</span>, <span class='va'>oil_import</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Plotting dependent variable: year on x-axis, oil imports on y-axis</span></span>
 <span><span class='va'>plot</span> <span class='op'>&lt;-</span> </span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>data_oil</span>,</span>
 <span>                    mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Year</span>,</span>
 <span>                                  y <span class='op'>=</span> <span class='va'>oil_import</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>,</span>
-<span>                        y <span class='op'>=</span> <span class='st'>"Oil Imports from United States (in thousand barrels)"</span>,</span>
+<span>                        y <span class='op'>=</span> <span class='st'>"Oil Imports to China from United States (in thousand barrels)"</span>,</span>
 <span>                      title <span class='op'>=</span> <span class='st'>"Oil Imports in China from United States (in thousand barrels), 2000-2010"</span>, caption <span class='op'>=</span> <span class='st'>"Source: U.S. Energy Information Administration"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2000</span>, <span class='fl'>2001</span>, <span class='fl'>2002</span>, <span class='fl'>2003</span>, <span class='fl'>2004</span>, <span class='fl'>2005</span>, <span class='fl'>2006</span>, <span class='fl'>2007</span>, <span class='fl'>2008</span>, <span class='fl'>2009</span>, <span class='fl'>2010</span><span class='op'>)</span><span class='op'>)</span></span>
 <span><span class='va'>plot</span></span></code></pre>
 </div>
-<img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" />
+<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+</div>
+<p>The following plot depicts the independent variable, China’s military expenditures.</p>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data_military</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='st'>"militarydata.xls"</span>, sheet <span class='op'>=</span> <span class='st'>"Data"</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Load data from The World Bank &amp; subset data to clean</span></span>
+<span><span class='va'>data_military</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='st'>"militarydata.xls"</span>, sheet <span class='op'>=</span> <span class='st'>"Data"</span><span class='op'>)</span></span>
 <span><span class='va'>data_military</span> <span class='op'>&lt;-</span> <span class='va'>data_military</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>`Country Name`</span> <span class='op'>==</span> <span class='st'>"China"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span>select <span class='op'>=</span> <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>`Country Name`</span>, <span class='va'>`Country Code`</span>, <span class='va'>`Indicator Name`</span>, <span class='va'>`Indicator Code`</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>data_military</span> <span class='op'>&lt;-</span> <span class='va'>data_military</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span>cols<span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> </span>
-<span>  </span>
+<span></span>
+<span><span class='co'># Filtering data by year and making numbers more manageable</span></span>
 <span><span class='va'>data_military</span> <span class='op'>&lt;-</span> <span class='va'>data_military</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>name</span> <span class='op'>&gt;=</span> <span class='fl'>2000</span> <span class='op'>&amp;</span> <span class='va'>name</span> <span class='op'>&lt;=</span> <span class='fl'>2010</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>new_value <span class='op'>=</span> <span class='va'>value</span> <span class='op'>/</span> <span class='fl'>1000000000</span><span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>military_expenditures <span class='op'>=</span> <span class='va'>value</span> <span class='op'>/</span> <span class='fl'>1000000000</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>data_military</span> <span class='op'>&lt;-</span> <span class='va'>data_military</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span><span class='st'>"Year"</span> <span class='op'>=</span> <span class='st'>"name"</span><span class='op'>)</span></span>
 <span>             </span>
 <span><span class='va'>data_military</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span><span class='op'>(</span><span class='va'>data_military</span>, Year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>Year</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>data_military</span> <span class='op'>&lt;-</span> <span class='va'>data_military</span> <span class='op'>|&gt;</span></span>
+<span><span class='co'># Merging data on military expenditures and data on oil production</span></span>
+<span><span class='va'>data_merged</span> <span class='op'>&lt;-</span> <span class='va'>data_military</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>data_oil</span>, by <span class='op'>=</span> <span class='st'>"Year"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>    <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span>select <span class='op'>=</span> <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>`value`</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
+<span><span class='co'># Plotting independent variable: year on x-axis and military expenditures on y-axis</span></span>
 <span><span class='va'>plot_2</span> <span class='op'>&lt;-</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>data_military</span>,</span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>data_merged</span>,</span>
 <span>                    mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Year</span>,</span>
-<span>                                  y <span class='op'>=</span> <span class='va'>new_value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>                                  y <span class='op'>=</span> <span class='va'>military_expenditures</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>,</span>
 <span>                        y <span class='op'>=</span> <span class='st'>"China Military Expenditures (USD billions)"</span>,</span>
 <span>                      title <span class='op'>=</span> <span class='st'>"China Military Expenditures (USD billions), 2000-2010"</span>,</span>
@@ -1576,17 +1597,35 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2000</span>, <span class='fl'>2001</span>, <span class='fl'>2002</span>, <span class='fl'>2003</span>, <span class='fl'>2004</span>, <span class='fl'>2005</span>, <span class='fl'>2006</span>, <span class='fl'>2007</span>, <span class='fl'>2008</span>, <span class='fl'>2009</span>, <span class='fl'>2010</span><span class='op'>)</span><span class='op'>)</span></span>
 <span><span class='va'>plot_2</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-1-2.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
-<p>The coefficient of 0.0041704 for the explanatory variable, oil imports from the United States into China, is extremely small, signifying that there is an insignificant correlation between US imports of oil into China and military expenditures. This does not support my hypothesis and shows that oil imports from the United States do not have a significant relationship with military expenditures.</p>
+<h2 id="results">Results:</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
-<span><span class='va'>fit_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>new_value</span> <span class='op'>~</span> <span class='va'>oil_import</span>, data <span class='op'>=</span> <span class='va'>data_military</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Plotting the analysis; both the independent and dependent variables</span></span>
+<span><span class='va'>plot_results</span> <span class='op'>&lt;-</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>data_merged</span>,</span>
+<span>                    mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>military_expenditures</span>,</span>
+<span>                                  y <span class='op'>=</span> <span class='va'>oil_import</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"China Military Expenditures (USD billions), 2000-2010"</span>,</span>
+<span>                        y <span class='op'>=</span> <span class='st'>"Oil Imports from United States (in thousand barrels)"</span>,</span>
+<span>                      title <span class='op'>=</span> <span class='st'>"China's Military Expenditures and Oil Imports from the U.S., 2000-2010"</span>,</span>
+<span>                      caption <span class='op'>=</span> <span class='st'>"Source: The World Bank, U.S. Energy Information Administration"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, se<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span><span class='va'>plot_results</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>The scatterplot depicting the independent variable, China’s military expenditures, and the dependent variable, oil imports from the United States to China, depict an increasing, positive trend. The line of best fit is an increasing, positive line which may indicate a positive relationship between military expenditures and oil imports. This means that as China’s military expenditures increase, oil imports from the United States to China also increases.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Run a regression analysis: oil imports as the explanatory variable, military expenditures as outcome variable</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
+<span><span class='va'>fit_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>oil_import</span> <span class='op'>~</span> <span class='va'>military_expenditures</span>, data <span class='op'>=</span> <span class='va'>data_merged</span><span class='op'>)</span></span>
 <span><span class='va'>fit_1</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span>  </span>
-<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
 <thead>
@@ -1598,15 +1637,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">24.8407135</td>
+<td style="text-align: right;">-1633.442</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">oil_import</td>
-<td style="text-align: right;">0.0041704</td>
+<td style="text-align: left;">military_expenditures</td>
+<td style="text-align: right;">158.837</td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>The coefficient of 158.8 for the explanatory variable, China’s military expenditures, is large and positive, signifying that there is a statistically significant coefficient. This may indicate a positive correlation between military expenditures and China’s import of US oil such that as military expenditures increase, oil imports from the United States also increase. This supports my original hypothesis that military expenditures in China may have a positive relationship with China’s import of oil from the United States. However, given the many possible confounders or alternative explanations, we cannot interpret this relationship causally. However, we can suggest that there does exist a positive, statistically significant relationship between China’s military expenditures and China’s import of oil from the United States.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The scatterplot and regression analysis both indicated a positive, increasing relationship between military expenditures and oil exports, suggesting that as military expenditures increase, oil imports also increase. This supports my hypothesis that as China’s military expenditures increase, oil imports from the United States also increase. However, there are limitations. There are possible vulnerabilities in this data analysis such as possible confounders that could undermine the relationship. A possible confounder could be the increase in China’s population from 2000-2010, which may result in both an increase in oil imports broadly and an increase in China’s military funding to support the security of a growing population. Additionally, while the United States plays a key role in Chinese foreign policy, comparing the oil imports from other countries to China in relation to the United States could provide a more substantive finding. With more time and money, I would expand this research design to consider possible control variables, such as the growing population in China, compare the oil imports from the United States in relation to other countries, and zoom in on the top countries that China imports oil from. I would also explore data analysis for alternative explanations. Additionally, military expenditures as a variable is very broad, so perhaps focusing on military funding that is allocated specifically for international security issues could be more illuminating.</p>
+<p>From previous milestones:</p>
+<h2 id="part-1-project-thoughts">Part 1: Project thoughts</h2>
+<p>I am interested in exploring data related to the relationship between the US exports of crude oil to China and China’s military spending from 2000-2010.</p>
+<h2 id="part-2-proposal-for-project">Part 2: Proposal for Project</h2>
+<p>My research question is: To what extent are China’s foreign oil trade policies motivated by increasing military capabilities?</p>
+<p>I hypothesize that China’s foreign oil trade policy, particularly ith the United States both drives and is driven by strengthening military capabilities. I hypothesize that this could be explained by historical memory and China’s past with the century of humiliation. I will use data from the U.S. Energy Information Administration from 2000-2010 and from the World Bank. The explanatory variable of interest is the U.S. exports of crude oil to China in thousands of barrels, and the outcome variable of interest is military expenditures (% GDP) in China.</p>
+<p>The observed pattern would provide support for my hypothesis in observing a correlation between a greater dependency on US oil exports and an increase in military expenditures. An increasing pattern would suggest that as China’s reliance on US crude oil increases, military spending in China also increases. This result would accept my hypothesis. The observed pattern that would disprove my hypothesis is that a decreasing pattern would suggest a negative relationship such that as dependence on US oil increase, military spending decreases.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
